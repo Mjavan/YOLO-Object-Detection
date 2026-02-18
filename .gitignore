@@ -33,3 +33,5 @@ pruned_models/
 logs/
 kitti/
 errors/
+
+datasets/coco8/
