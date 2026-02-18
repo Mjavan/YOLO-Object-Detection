@@ -1,0 +1,10 @@
+train: ./train
+val: ./valid
+
+nc: 3
+
+names:
+
+  0: Car
+  1: Pedestrian
+  2: Cyclist

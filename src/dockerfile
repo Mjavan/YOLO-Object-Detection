@@ -1,0 +1,29 @@
+FROM ultralytics/ultralytics:latest
+
+# Fix libGL
+RUN apt-get update && apt-get install -y libgl1 && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+# Copy dependency list first
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy your code
+COPY src ./src
+COPY kitti.yaml .
+
+CMD ["python", "src/train.py"]
+
+
+
+
+
+
+
+
+
+
+
