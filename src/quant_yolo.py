@@ -22,6 +22,18 @@ def export_int8_engine(model_path):
 
     print("✅ INT8 engine export complete.\n")
 
+def export_onnx(model_path):
+
+    print("Exporting ONNX model...")
+
+    model = YOLO(model_path)
+
+    model.export(
+        format="onnx"
+    )
+
+    print("ONNX export complete")
+
 
 def run_validation(args):
 
@@ -49,6 +61,10 @@ def run_validation(args):
     if args.use_engine:
         print(f"Using TensorRT engine for inference: {MODEL_PATH.with_suffix('.engine')}")
         model = YOLO(str(MODEL_PATH).replace(".pt", ".engine"))
+    elif args.use_onnx:
+        onnx_path = MODEL_PATH.with_suffix(".onnx")
+        print(f"Using ONNX model for CPU inference: {onnx_path}")
+        model = YOLO(onnx_path)
     else:
         model = YOLO(MODEL_PATH)
 
@@ -104,6 +120,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch", type=int, default=1, help="Batch size")
     parser.add_argument("--export-int8", action="store_true", help="Export TensorRT INT8 engine")
     parser.add_argument("--use-engine", action="store_true", help="Use TensorRT engine for inference")
+    parser.add_argument("--use-onnx", action="store_true", help="Use ONNX model for CPU inference")
 
     args = parser.parse_args()
 
