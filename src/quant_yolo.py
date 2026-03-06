@@ -63,6 +63,9 @@ def run_validation(args):
         verbose=False
     )
 
+    print("\n==============================")
+    print(f'batch:{args.batch}, half:{args.half}')
+
     # Speed metrics (ms/image)
     speed = results.speed
 
